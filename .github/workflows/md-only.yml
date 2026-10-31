@@ -1,0 +1,20 @@
+name: md-only
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  md-only:
+    name: md-only
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fail on non-Markdown files
+        run: |
+          bad=$(git diff --name-only --diff-filter=AMR "origin/${{ github.base_ref }}...HEAD" \
+            | grep -v -E '\.md$|^\.gitignore$|^\.github/workflows/md-only\.yml$' || true)
+          if [ -n "$bad" ]; then
+            echo "Non-Markdown files found:"; echo "$bad"; exit 1
+          fi
+          echo "All changed files are Markdown."
