@@ -1,4 +1,7 @@
 # Claude Architect Exam Repo
 
-Study notes, practice questions, and code for the Claude architect exam.
+Markdown-only study repo for the Claude architect exam.
+
+- [notes](notes/)
+- [practice-questions](practice-questions/)
 
